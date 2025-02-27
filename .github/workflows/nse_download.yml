@@ -20,8 +20,29 @@ jobs:
       run: |
         pip install jupyter nbconvert pandas numpy requests  # Install required packages
 
+    - name: Debug - Before Running Notebook
+      run: |
+        echo "Current Working Directory:"
+        pwd
+        echo "Files in the Directory:"
+        ls -la
+
     - name: Convert Notebook to Python Script
       run: jupyter nbconvert --to script nse_data_greeks.ipynb  # Converts to a .py script
 
     - name: Run the Converted Python Script
       run: python nse_data_greeks.py  # Executes the script
+
+    - name: Debug - After Running Notebook
+      run: |
+        echo "Files in the Directory (After Execution):"
+        ls -la
+
+    - name: Upload Output Files
+      uses: actions/upload-artifact@v3
+      with:
+        name: nse_output
+        path: |
+          *.csv
+          *.json
+          *.txt
