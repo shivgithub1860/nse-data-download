@@ -1,27 +1,27 @@
-name: NSE Data Download
+name: Run NSE Data Greeks Notebook
 
 on:
-  push:
-    branches:
-      - main  # Runs when you push changes to the main branch
-  workflow_dispatch:  # Allows manual execution
-  schedule:
-    - cron: '*/5 * * * *'  # Runs every 5 minutes
+  workflow_dispatch:  # Allows you to manually trigger this workflow from GitHub
 
 jobs:
-  run_script:
+  run-notebook:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3  # Fetches your repo so we can access the notebook
 
-      - name: Setup Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.9'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # Change Python version if needed
 
-      - name: Install dependencies
-        run: pip install pandas requests
+    - name: Install Dependencies
+      run: |
+        pip install jupyter nbconvert pandas numpy requests  # Install required packages
 
-      - name: Run script
-        run: python nse_data_greeks.ipynb
+    - name: Convert Notebook to Python Script
+      run: jupyter nbconvert --to script nse_data_greeks.ipynb  # Converts to a .py script
+
+    - name: Run the Converted Python Script
+      run: python nse_data_greeks.py  # Executes the script
