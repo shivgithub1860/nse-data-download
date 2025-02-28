@@ -31,7 +31,7 @@ jobs:
       run: jupyter nbconvert --to script nse_data_options.ipynb  # Converts to .py script
 
     - name: Run the Converted Python Script
-      run: python nse_data_greeks.py  # Executes the script
+      run: python nse_data_options.py  # Executes the script
 
     - name: Debug - After Running Notebook
       run: |
