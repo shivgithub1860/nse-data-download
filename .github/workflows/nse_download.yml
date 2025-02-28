@@ -28,7 +28,7 @@ jobs:
         ls -la
 
     - name: Convert Notebook to Python Script
-      run: jupyter nbconvert --to script nse_data_greeks.ipynb  # Converts to .py script
+      run: jupyter nbconvert --to script nse_data_options.ipynb  # Converts to .py script
 
     - name: Run the Converted Python Script
       run: python nse_data_greeks.py  # Executes the script
