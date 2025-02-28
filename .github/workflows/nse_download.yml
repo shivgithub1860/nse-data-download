@@ -28,10 +28,10 @@ jobs:
         ls -la
 
     - name: Convert Notebook to Python Script
-      run: jupyter nbconvert --to script nse_data_options.ipynb  # Converts to .py script
+      run: jupyter nbconvert --to script nse_data_allSP.ipynb  # Converts to .py script
 
     - name: Run the Converted Python Script
-      run: python nse_data_options.py  # Executes the script
+      run: python nse_data_allSP.ipynb  # Executes the script
 
     - name: Debug - After Running Notebook
       run: |
