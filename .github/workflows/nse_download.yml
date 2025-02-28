@@ -20,20 +20,23 @@ jobs:
       run: |
         pip install jupyter nbconvert pandas numpy requests  # Install required packages
 
-    - name: Debug - Before Running Notebook
+    - name: Debug - Before Running Script
       run: |
         echo "Current Working Directory:"
         pwd
         echo "Files in the Directory:"
         ls -la
 
-    - name: Convert Notebook to Python Script
-      run: jupyter nbconvert --to script nse_data_options.ipynb  # Converts to .py script
+    - name: Convert Notebook to Python Script (if needed)
+      run: |
+        if [ -f "nse_options.ipynb" ]; then
+          jupyter nbconvert --to script nse_options.ipynb
+        fi
 
-    - name: Run the Converted Python Script
-      run: python nse_data_options.ipynb  # Executes the script
+    - name: Run the Python Script
+      run: python nse_options.py  # Executes the updated script
 
-    - name: Debug - After Running Notebook
+    - name: Debug - After Running Script
       run: |
         echo "Files in the Directory (After Execution):"
         ls -la
